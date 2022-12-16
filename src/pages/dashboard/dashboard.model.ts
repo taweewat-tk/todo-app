@@ -14,6 +14,7 @@ const useViewModel = () => {
   const [selectTodoId, setSelectTodoId] = useState("");
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [todo, setTodo] = useState<FormProps>({} as FormProps);
+  const [isFinishLoad, setIsFinishLoad] = useState(false);
 
   useEffect(() => {
     const todoAPI = new TodoAPI();
@@ -23,6 +24,9 @@ const useViewModel = () => {
       },
       error: (err) => {
         console.error(err);
+      },
+      complete: () => {
+        setIsFinishLoad(true);
       },
     });
   }, []);
@@ -133,6 +137,7 @@ const useViewModel = () => {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
     handleDelete,
+    isFinishLoad,
   };
 };
 export default useViewModel;
