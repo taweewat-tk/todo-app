@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { FormProps } from "../../common/types/form";
 import { useContextAuthManager } from "../../context/auth.context";
 import TodoAPI from "../../service/todo";
@@ -44,15 +45,41 @@ const useViewModel = () => {
       next: (data) => {
         setTodoList((prev) => [...prev, data]);
         setIsCreateModalOpen(false);
+        toast.success("Todo created successfully.");
       },
       error: (err) => {
         console.error(err);
+        toast.error("Todo created failed.");
       },
     });
   };
 
   const handleSelectTodo = (id: string) => {
     setSelectTodoId(id);
+  };
+
+  const handleOpenDeleteModal = (todo: Todo) => {
+    handleSelectTodo(todo.id);
+    setTodo({
+      title: todo.title,
+      description: todo.description,
+    });
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDelete = () => {
+    const todoAPI = new TodoAPI();
+    todoAPI.deleteTodo(selectTodoId).subscribe({
+      next: () => {
+        setTodoList((prev) => prev.filter((todo) => todo.id !== selectTodoId));
+        setIsDeleteModalOpen(false);
+        toast.success("Todo deleted successfully.");
+      },
+      error: (err) => {
+        console.error(err);
+        toast.error("Todo deleted failed.");
+      },
+    });
   };
 
   const handleOpenEditModal = (id: string) => {
@@ -72,34 +99,12 @@ const useViewModel = () => {
     });
   };
 
-  const handleOpenDeleteModal = (todo: Todo) => {
-    handleSelectTodo(todo.id);
-    setTodo({
-      title: todo.title,
-      description: todo.description,
-    });
-    setIsDeleteModalOpen(true);
-  };
-
-  const handleDelete = () => {
-    const todoAPI = new TodoAPI();
-    todoAPI.deleteTodo(selectTodoId).subscribe({
-      next: () => {
-        setIsDeleteModalOpen(false);
-        setTodoList((prev) => prev.filter((todo) => todo.id !== selectTodoId));
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-  };
-
   const handleUpdate = (values: FormProps) => {
     const todoAPI = new TodoAPI();
     const payload = {
       id: selectTodoId,
       title: values.title,
-      description: values.description,
+      description: values.description ? values.description : "",
     };
     todoAPI.updateTodo(payload).subscribe({
       next: (data) => {
@@ -112,9 +117,11 @@ const useViewModel = () => {
           })
         );
         setIsEditModalOpen(false);
+        toast.success("Todo updated successfully.");
       },
       error: (err) => {
         console.error(err);
+        toast.error("Todo updated failed.");
       },
     });
   };

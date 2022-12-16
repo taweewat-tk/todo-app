@@ -53,7 +53,7 @@ const Dashboard = () => {
               onClick={() => handleOpenEditModal(todo.id)}
             >
               <div className="text-2xl font-bold mb-4">{todo.title}</div>
-              <div>{todo.description}</div>
+              <div className="mb-4">{todo.description}</div>
               <div className="text-black/50">{todo.createdAt}</div>
             </div>
             <Button
