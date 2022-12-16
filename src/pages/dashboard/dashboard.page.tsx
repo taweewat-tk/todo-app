@@ -46,16 +46,23 @@ const Dashboard = () => {
           Create
         </Button>
       </div>
-      {todoList.map((todo) => {
-        return (
-          <TodoList
-            key={todo.id}
-            todo={todo}
-            handleOpenEditModal={handleOpenEditModal}
-            handleOpenDeleteModal={handleOpenDeleteModal}
-          />
-        );
-      })}
+      {todoList.length > 0 ? (
+        todoList.map((todo) => {
+          return (
+            <TodoList
+              key={todo.id}
+              todo={todo}
+              handleOpenEditModal={handleOpenEditModal}
+              handleOpenDeleteModal={handleOpenDeleteModal}
+            />
+          );
+        })
+      ) : (
+        <div className="text-center my-10 text-black/50">
+          <div className="text-2xl">No todo !</div>
+          <div className="text-lg">Please create to add new todo.</div>
+        </div>
+      )}
       <CreateModal
         isOpen={isCreateModalOpen}
         setIsOpen={setIsCreateModalOpen}
