@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormProps } from "../../common/types/form";
+import { FormProps } from "../../common/types/form.type";
+import { Todo } from "../../common/types/todo.type";
 import { useContextAuthManager } from "../../context/auth.context";
 import TodoAPI from "../../service/todo";
-
-type Todo = {
-  id: string;
-  title: string;
-  description: string;
-  updatedAt: string;
-  createdAt: string;
-  userId: string;
-};
 
 const useViewModel = () => {
   const { logout } = useContextAuthManager();

@@ -12,7 +12,7 @@ const Button = ({ children, className, type, onClick }: ButtonProps) => {
       onClick={onClick}
       type={type}
       className={cx(
-        "text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center",
+        "text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center",
         className
       )}
     >

@@ -3,6 +3,7 @@ import DeleteModal from "./component/delete-modal.component";
 import CreateModal from "./component/create-modal.component";
 import EditModal from "./component/edit-modal.component";
 import useViewModel from "./dashboard.model";
+import TodoList from "./component/todo-list.component";
 
 const Dashboard = () => {
   const {
@@ -47,23 +48,12 @@ const Dashboard = () => {
       </div>
       {todoList.map((todo) => {
         return (
-          <div key={todo.id} className="shadow-md rounded-xl relative mb-4">
-            <div
-              className="p-5 cursor-pointer"
-              onClick={() => handleOpenEditModal(todo.id)}
-            >
-              <div className="text-2xl font-bold mb-4">{todo.title}</div>
-              <div className="mb-4">{todo.description}</div>
-              <div className="text-black/50">{todo.createdAt}</div>
-            </div>
-            <Button
-              onClick={() => handleOpenDeleteModal(todo)}
-              className="bg-red-600 hover:bg-red-700 z-10 absolute right-5 top-5"
-              type="button"
-            >
-              Delete
-            </Button>
-          </div>
+          <TodoList
+            key={todo.id}
+            todo={todo}
+            handleOpenEditModal={handleOpenEditModal}
+            handleOpenDeleteModal={handleOpenDeleteModal}
+          />
         );
       })}
       <CreateModal

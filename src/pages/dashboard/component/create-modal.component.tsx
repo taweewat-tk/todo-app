@@ -3,7 +3,7 @@ import Button from "../../../common/base-ui/button/button.component";
 import Input from "../../../common/base-ui/fields/input.component";
 import Textarea from "../../../common/base-ui/fields/textarea.component";
 import Modal from "../../../common/base-ui/modal/modal.component";
-import { FormProps } from "../../../common/types/form";
+import { FormProps } from "../../../common/types/form.type";
 
 type CreateModalProps = {
   isOpen: boolean;
