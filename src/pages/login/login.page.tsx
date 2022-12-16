@@ -1,34 +1,15 @@
-import { useState } from "react";
 import { Form } from "react-final-form";
-import { useNavigate } from "react-router-dom";
 import Input from "../../common/base-ui/fields/input.component";
-import { ROUTE } from "../../common/constant/routes";
-import User from "../../service/user.service";
-import { setToken } from "../../utils/token";
-
-type FormLoginProps = {
-  username: string;
-  password: string;
-};
+import useViewModel from "./login.model";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [errorText, setErrorText] = useState("");
-  const handleSubmit = (values: FormLoginProps) => {
-    const user = new User();
-    user.login(values.username, values.password).subscribe({
-      next: (response) => {
-        setToken(response.token);
-        navigate(ROUTE.DASHBOARD);
-      },
-      error: (err) => {
-        setErrorText(err.message);
-      },
-    });
-  };
+  const { handleSubmit, errorText } = useViewModel();
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-[400px]">
+        <div className="text-center text-4xl font-bold mb-8 uppercase">
+          Todo App
+        </div>
         <Form
           onSubmit={handleSubmit}
           render={({ handleSubmit }) => {

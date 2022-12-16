@@ -9,9 +9,15 @@ type EditModalProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   handleUpdate: (values: FormProps) => void;
+  initialValues: FormProps;
 };
 
-const EditModal = ({ isOpen, setIsOpen, handleUpdate }: EditModalProps) => {
+const EditModal = ({
+  isOpen,
+  setIsOpen,
+  handleUpdate,
+  initialValues,
+}: EditModalProps) => {
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className="text-center mb-4 text-lg font-medium leading-6 text-gray-900">
@@ -19,11 +25,12 @@ const EditModal = ({ isOpen, setIsOpen, handleUpdate }: EditModalProps) => {
       </div>
       <Form
         onSubmit={handleUpdate}
+        initialValues={initialValues}
         render={({ handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <Input name="title" label="Title" type="text" />
+                <Input name="title" label="Title" type="text" required />
               </div>
               <div className="mb-4">
                 <Textarea name="description" label="Description" rows={8} />
@@ -37,7 +44,7 @@ const EditModal = ({ isOpen, setIsOpen, handleUpdate }: EditModalProps) => {
                   Cancel
                 </Button>
                 <Button className="bg-blue-700 hover:bg-blue-800" type="submit">
-                  Create
+                  Update
                 </Button>
               </div>
             </form>

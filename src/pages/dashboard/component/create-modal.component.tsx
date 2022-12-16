@@ -23,7 +23,7 @@ const CreateModal = ({ isOpen, setIsOpen, handleCreate }: CreateModalProps) => {
           return (
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <Input name="title" label="Title" type="text" />
+                <Input name="title" label="Title" type="text" required />
               </div>
               <div className="mb-4">
                 <Textarea name="description" label="Description" rows={8} />

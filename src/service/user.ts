@@ -6,7 +6,12 @@ type LoginResponse = {
   token: string;
 };
 
-class User {
+type LoginPayload = {
+  username: string;
+  password: string;
+};
+
+class UserAPI {
   http: BaseRxios;
 
   constructor() {
@@ -15,7 +20,7 @@ class User {
     });
   }
 
-  login = (username: string, password: string) => {
+  login = ({ username, password }: LoginPayload) => {
     return this.http
       .post<LoginResponse>("/users/auth", { username, password })
       .pipe(
@@ -27,4 +32,4 @@ class User {
       );
   };
 }
-export default User;
+export default UserAPI;

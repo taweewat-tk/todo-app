@@ -5,13 +5,19 @@ type DeleteModalProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   handleDelete: () => void;
+  todoTitle: string;
 };
 
-const DeleteModal = ({ isOpen, setIsOpen, handleDelete }: DeleteModalProps) => {
+const DeleteModal = ({
+  isOpen,
+  setIsOpen,
+  handleDelete,
+  todoTitle,
+}: DeleteModalProps) => {
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className="text-center mb-4 text-lg font-medium leading-6 text-gray-900">
-        Delete ?
+        Delete {todoTitle} ?
       </div>
       <div className="flex justify-center">
         <Button
