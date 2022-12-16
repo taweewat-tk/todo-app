@@ -18,7 +18,9 @@ const TodoList = ({
         className="p-5 cursor-pointer"
         onClick={() => handleOpenEditModal(todo.id)}
       >
-        <div className="text-2xl font-bold mb-4">{todo.title}</div>
+        <div className="text-2xl font-bold mb-4 truncate w-[148px] md:w-[500px] lg:w-[800px]">
+          {todo.title}
+        </div>
         <div className="mb-4">{todo.description}</div>
         <div className="text-black/50">{todo.createdAt}</div>
       </div>
